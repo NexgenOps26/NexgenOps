@@ -42,23 +42,29 @@ const features: Feature[] = [
 
 export function FeatureGrid() {
   return (
-    <div className="grid gap-x-12 gap-y-9 sm:grid-cols-2">
+    <div className="grid gap-x-8 gap-y-7 sm:grid-cols-2 lg:gap-x-6 lg:gap-y-4 xl:gap-x-8 xl:gap-y-5 2xl:gap-x-10 2xl:gap-y-7">
       {features.map((feature) => {
         const Icon = feature.icon;
 
         return (
-          <article key={feature.title} className="flex min-w-0 items-start gap-5">
+          <article
+            key={feature.title}
+            className="flex min-w-0 items-start gap-5 lg:gap-3 2xl:gap-4"
+          >
             <div
-              className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br shadow-lg ${feature.accent}`}
+              className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br shadow-lg lg:h-10 lg:w-10 2xl:h-14 2xl:w-14 ${feature.accent}`}
               aria-hidden="true"
             >
-              <Icon className={`h-7 w-7 ${feature.iconColor}`} strokeWidth={2.1} />
+              <Icon
+                className={`h-7 w-7 lg:h-5 lg:w-5 2xl:h-7 2xl:w-7 ${feature.iconColor}`}
+                strokeWidth={2.1}
+              />
             </div>
             <div className="min-w-0">
-              <h3 className="text-base font-bold leading-snug text-white">
+              <h3 className="text-base font-bold leading-snug text-white lg:text-sm 2xl:text-base">
                 {feature.title}
               </h3>
-              <p className="mt-2 text-[0.96rem] leading-7 text-slate-300">
+              <p className="mt-2 text-[0.96rem] leading-7 text-slate-300 lg:mt-1 lg:text-[0.8rem] lg:leading-5 xl:text-[0.86rem] xl:leading-6 2xl:mt-2 2xl:text-[0.96rem] 2xl:leading-7">
                 {feature.description}
               </p>
             </div>
