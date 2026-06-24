@@ -8,6 +8,8 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+.python/
+node_modules/
 build/
 develop-eggs/
 dist/
@@ -171,6 +173,9 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+
+# TypeScript
+*.tsbuildinfo
 
 # Pyre type checker
 .pyre/
