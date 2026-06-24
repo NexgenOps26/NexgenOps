@@ -1,0 +1,17 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">NexgenOps logo</title>
+  <desc id="desc">Circular teal and blue arrow mark with a rising operations line.</desc>
+  <rect width="512" height="512" rx="84" fill="#F8FAFC"/>
+  <path d="M118.2 350.3C78.8 297.6 78 222.9 119.8 168.1C160.7 114.5 233 92.4 297.9 114.7" stroke="#0F6972" stroke-width="24" stroke-linecap="round"/>
+  <path d="M383.6 162.7C423.4 215.4 424.2 290.6 382.1 345.6C340.8 399.7 267.7 421.6 202.4 398.4" stroke="#1D4ED8" stroke-width="18" stroke-linecap="round"/>
+  <path d="M132 349L218.8 173.1C226.4 157.7 247.6 155.6 258.1 169.2L303.2 227.7L364.8 92L415.4 225.9L369.7 201.5L322 304.9C314.4 321.4 291.7 323.7 281 309L238.7 250.9L170.5 386.2C163.1 401 142.9 402.8 133.2 389.4C124.7 377.7 124.2 361.9 132 349Z" fill="url(#paint0_linear)"/>
+  <path d="M132 349L218.8 173.1C226.4 157.7 247.6 155.6 258.1 169.2L303.2 227.7L364.8 92L415.4 225.9L369.7 201.5L322 304.9C314.4 321.4 291.7 323.7 281 309L238.7 250.9L170.5 386.2C163.1 401 142.9 402.8 133.2 389.4C124.7 377.7 124.2 361.9 132 349Z" stroke="#F8FAFC" stroke-width="14" stroke-linejoin="round"/>
+  <path d="M363.6 92.6L431.2 76.6L415.3 225.7L363.6 92.6Z" fill="#2F6FEA"/>
+  <defs>
+    <linearGradient id="paint0_linear" x1="125.2" y1="340.9" x2="411.1" y2="158.1" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F6B73"/>
+      <stop offset="0.48" stop-color="#16499A"/>
+      <stop offset="1" stop-color="#2F6FEA"/>
+    </linearGradient>
+  </defs>
+</svg>
