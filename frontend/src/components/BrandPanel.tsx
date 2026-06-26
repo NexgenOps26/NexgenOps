@@ -3,7 +3,7 @@ import { Logo } from "./Logo";
 
 export function BrandPanel() {
   return (
-    <aside className="relative order-2 min-h-[760px] overflow-hidden bg-[radial-gradient(circle_at_12%_10%,rgba(37,99,235,0.28),transparent_24%),radial-gradient(circle_at_88%_86%,rgba(59,130,246,0.2),transparent_25%),linear-gradient(135deg,#020617_0%,#04122c_48%,#061b45_100%)] px-6 py-8 text-white sm:px-10 lg:order-1 lg:flex lg:h-full lg:min-h-0 lg:basis-[52%] lg:px-10 lg:py-6 xl:px-14">
+    <aside className="relative order-2 min-h-[760px] overflow-hidden bg-[radial-gradient(circle_at_12%_10%,rgba(37,99,235,0.28),transparent_24%),radial-gradient(circle_at_88%_86%,rgba(59,130,246,0.2),transparent_25%),linear-gradient(135deg,#020617_0%,#04122c_48%,#061b45_100%)] px-6 py-8 text-white sm:px-10 lg:order-1 lg:flex lg:min-h-screen lg:basis-[52%] lg:px-10 lg:py-6 xl:px-14">
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.055]"
         aria-hidden="true"
@@ -27,7 +27,7 @@ export function BrandPanel() {
           </p>
         </header>
 
-        <main className="flex flex-1 flex-col justify-center py-12 lg:min-h-0 lg:py-4 xl:py-5">
+        <main className="flex flex-1 flex-col justify-center py-12 lg:py-4 xl:py-5">
           <h1 className="max-w-[680px] text-[2.55rem] font-black leading-[1.15] tracking-normal text-white sm:text-5xl lg:text-[2.7rem] lg:leading-[1.08] xl:text-[3rem] 2xl:text-[3.55rem]">
             <span className="bg-gradient-to-r from-electric-500 to-electric-300 bg-clip-text text-transparent">
               AI-Powered

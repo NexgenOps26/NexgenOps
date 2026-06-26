@@ -17,7 +17,6 @@ export default {
       },
       boxShadow: {
         "enterprise-button": "0 18px 38px rgba(2, 6, 23, 0.24)",
-        "input-focus": "0 0 0 4px rgba(37, 99, 235, 0.12)",
       },
       fontFamily: {
         sans: [

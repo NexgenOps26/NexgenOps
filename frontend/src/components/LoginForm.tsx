@@ -1,4 +1,5 @@
-import { FormEvent, useState } from "react";
+import type { FormEvent } from "react";
+import { useState } from "react";
 import {
   ArrowRight,
   Calendar,
@@ -11,10 +12,27 @@ import {
 } from "lucide-react";
 import { Logo } from "./Logo";
 
-type ActionName = "login" | "otp" | "register" | "demo";
+type PlaceholderAction = "otp" | "register" | "demo";
+type LoginCredentials = {
+  username: string;
+  password: string;
+};
 
-function logAction(action: ActionName) {
-  console.log(action);
+const inputClassName =
+  "h-[52px] w-full rounded-2xl border border-slate-300 bg-white/80 pl-16 text-base font-medium text-slate-900 transition placeholder:text-slate-500 hover:border-slate-400 focus:border-blue-600 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-600/20 lg:h-[50px]";
+
+const secondaryActionClassName =
+  "flex h-[54px] w-full items-center justify-center gap-3 rounded-2xl border border-slate-300 bg-white/70 text-base font-bold text-slate-800 transition hover:-translate-y-0.5 hover:border-blue-500 hover:bg-white hover:shadow-[0_16px_36px_rgba(37,99,235,0.14)] focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-600/30 lg:h-[52px] xl:text-lg";
+
+const inquiryActionClassName =
+  "flex h-[54px] items-center justify-center gap-3 rounded-2xl border border-slate-300 bg-white/70 px-4 text-sm font-bold text-blue-700 transition hover:-translate-y-0.5 hover:border-blue-500 hover:bg-white hover:shadow-[0_14px_30px_rgba(37,99,235,0.12)] focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-600/30 lg:h-[50px] xl:text-base";
+
+function handlePlaceholderAction(_action: PlaceholderAction) {
+  // Placeholder actions are intentionally inert until backend flows are added.
+}
+
+function handleLogin(_credentials: LoginCredentials) {
+  // Frontend-only shell: API integration can replace this boundary later.
 }
 
 function Divider({ label }: { label: string }) {
@@ -29,14 +47,18 @@ function Divider({ label }: { label: string }) {
 
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const [credentials, setCredentials] = useState<LoginCredentials>({
+    username: "",
+    password: "",
+  });
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    logAction("login");
+    handleLogin(credentials);
   }
 
   return (
-    <section className="order-1 flex min-h-screen items-center justify-center bg-[#f8fafc] px-6 py-10 sm:px-10 lg:order-2 lg:h-full lg:min-h-0 lg:basis-[48%] lg:px-8 lg:py-5 xl:px-10">
+    <section className="order-1 flex min-h-screen items-center justify-center bg-[#f8fafc] px-6 py-10 sm:px-10 lg:order-2 lg:min-h-screen lg:basis-[48%] lg:px-8 lg:py-5 xl:px-10">
       <div className="w-full max-w-[520px]">
         <div className="mb-10 flex justify-center lg:mb-4 xl:mb-6">
           <Logo imageClassName="h-[84px] w-[84px] lg:h-16 lg:w-16 xl:h-[72px] xl:w-[72px]" />
@@ -70,7 +92,15 @@ export function LoginForm() {
                 type="text"
                 autoComplete="username"
                 placeholder="Enter your username or email"
-                className="h-[52px] w-full rounded-2xl border border-slate-300 bg-white/80 pl-16 pr-5 text-base font-medium text-slate-900 outline-none transition placeholder:text-slate-500 hover:border-slate-400 focus:border-blue-600 focus:shadow-input-focus lg:h-[50px]"
+                required
+                value={credentials.username}
+                className={`${inputClassName} pr-5`}
+                onChange={(event) =>
+                  setCredentials((current) => ({
+                    ...current,
+                    username: event.target.value,
+                  }))
+                }
               />
             </div>
           </div>
@@ -93,12 +123,20 @@ export function LoginForm() {
                 type={showPassword ? "text" : "password"}
                 autoComplete="current-password"
                 placeholder="Enter your password"
-                className="h-[52px] w-full rounded-2xl border border-slate-300 bg-white/80 pl-16 pr-16 text-base font-medium text-slate-900 outline-none transition placeholder:text-slate-500 hover:border-slate-400 focus:border-blue-600 focus:shadow-input-focus lg:h-[50px]"
+                required
+                value={credentials.password}
+                className={`${inputClassName} pr-16`}
+                onChange={(event) =>
+                  setCredentials((current) => ({
+                    ...current,
+                    password: event.target.value,
+                  }))
+                }
               />
               <button
                 type="button"
                 aria-label={showPassword ? "Hide password" : "Show password"}
-                className="absolute right-5 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-4 focus:ring-blue-600/15"
+                className="absolute right-5 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-600/30"
                 onClick={() => setShowPassword((value) => !value)}
               >
                 {showPassword ? (
@@ -114,8 +152,8 @@ export function LoginForm() {
 
           <button
             type="button"
-            onClick={() => logAction("otp")}
-            className="flex h-[54px] w-full items-center justify-center gap-3 rounded-2xl border border-slate-300 bg-white/70 text-base font-bold text-slate-800 transition hover:-translate-y-0.5 hover:border-blue-500 hover:bg-white hover:shadow-[0_16px_36px_rgba(37,99,235,0.14)] focus:outline-none focus:ring-4 focus:ring-blue-600/15 lg:h-[52px] xl:text-lg"
+            onClick={() => handlePlaceholderAction("otp")}
+            className={secondaryActionClassName}
           >
             <Smartphone className="h-5 w-5 xl:h-6 xl:w-6" aria-hidden="true" />
             <span>Login with OTP (Mobile/Email)</span>
@@ -123,7 +161,7 @@ export function LoginForm() {
 
           <button
             type="submit"
-            className="group flex h-[54px] w-full items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#020617,#0f172a,#0a2c70)] px-6 text-base font-black tracking-[0.08em] text-white shadow-enterprise-button transition hover:-translate-y-0.5 hover:shadow-[0_22px_44px_rgba(10,44,112,0.32)] focus:outline-none focus:ring-4 focus:ring-blue-600/20 lg:h-[52px] xl:text-lg"
+            className="group flex h-[54px] w-full items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#020617,#0f172a,#0a2c70)] px-6 text-base font-black tracking-[0.08em] text-white shadow-enterprise-button transition hover:-translate-y-0.5 hover:shadow-[0_22px_44px_rgba(10,44,112,0.32)] focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-600/35 lg:h-[52px] xl:text-lg"
           >
             <span className="flex-1 text-center">LOGIN</span>
             <ArrowRight
@@ -137,16 +175,16 @@ export function LoginForm() {
           <div className="grid gap-4 sm:grid-cols-2">
             <button
               type="button"
-              onClick={() => logAction("register")}
-              className="flex h-[54px] items-center justify-center gap-3 rounded-2xl border border-slate-300 bg-white/70 px-4 text-sm font-bold text-blue-700 transition hover:-translate-y-0.5 hover:border-blue-500 hover:bg-white hover:shadow-[0_14px_30px_rgba(37,99,235,0.12)] focus:outline-none focus:ring-4 focus:ring-blue-600/15 lg:h-[50px] xl:text-base"
+              onClick={() => handlePlaceholderAction("register")}
+              className={inquiryActionClassName}
             >
               <UserPlus className="h-5 w-5" aria-hidden="true" />
               <span>Register as New User</span>
             </button>
             <button
               type="button"
-              onClick={() => logAction("demo")}
-              className="flex h-[54px] items-center justify-center gap-3 rounded-2xl border border-slate-300 bg-white/70 px-4 text-sm font-bold text-blue-700 transition hover:-translate-y-0.5 hover:border-blue-500 hover:bg-white hover:shadow-[0_14px_30px_rgba(37,99,235,0.12)] focus:outline-none focus:ring-4 focus:ring-blue-600/15 lg:h-[50px] xl:text-base"
+              onClick={() => handlePlaceholderAction("demo")}
+              className={inquiryActionClassName}
             >
               <Calendar className="h-5 w-5" aria-hidden="true" />
               <span>Request a Demo</span>
@@ -156,11 +194,17 @@ export function LoginForm() {
 
         <p className="mx-auto mt-6 max-w-[460px] text-center text-sm leading-6 text-slate-500 lg:mt-3 lg:text-xs lg:leading-5 xl:mt-4 xl:text-sm xl:leading-6">
           By continuing, you agree to NexgenOps{" "}
-          <a className="font-bold text-blue-700 transition hover:text-blue-900" href="#">
+          <a
+            className="whitespace-nowrap font-bold text-blue-700 transition hover:text-blue-900 focus:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-blue-600/40"
+            href="/terms"
+          >
             Terms of Use
           </a>{" "}
           and{" "}
-          <a className="font-bold text-blue-700 transition hover:text-blue-900" href="#">
+          <a
+            className="whitespace-nowrap font-bold text-blue-700 transition hover:text-blue-900 focus:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-blue-600/40"
+            href="/privacy"
+          >
             Privacy Policy
           </a>
           .
