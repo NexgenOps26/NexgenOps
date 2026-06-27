@@ -35,6 +35,32 @@ button {
   cursor: pointer;
 }
 
+button:disabled {
+  cursor: not-allowed;
+}
+
+.auth-form-enter {
+  animation: auth-form-enter 220ms ease-out both;
+}
+
+@keyframes auth-form-enter {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-form-enter {
+    animation: none;
+  }
+}
+
 ::selection {
   color: #ffffff;
   background: #2563eb;
