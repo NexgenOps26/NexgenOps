@@ -22,7 +22,7 @@ export function LoginPage() {
         <section className="order-1 flex min-h-screen items-center justify-center overflow-hidden bg-[#f8fafc] px-6 py-10 sm:px-10 lg:order-2 lg:min-h-screen lg:basis-[48%] lg:px-8 lg:py-5 xl:px-10">
           <div key={mode} className="auth-form-enter w-full max-w-[520px]">
             {mode === "login" ? (
-              <LoginForm onRegisterClick={() => setMode("register")} />
+              <LoginForm />
             ) : (
               <RegisterForm
                 onRegister={handleRegister}
