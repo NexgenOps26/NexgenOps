@@ -1,8 +1,9 @@
+import axios from "axios";
 import api from "../api/axios";
 import type { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Calendar, Smartphone, User, UserPlus } from "lucide-react";
+import { Building2, Calendar, Smartphone, User } from "lucide-react";
 import {
   AuthField,
   Divider,
@@ -12,7 +13,6 @@ import {
   PrimaryAction,
   secondaryActionClassName,
 } from "./AuthFormControls";
-import { Logo } from "./Logo";
 
 type PlaceholderAction = "otp" | "demo";
 
@@ -25,7 +25,11 @@ function handlePlaceholderAction(_action: PlaceholderAction) {
   // Placeholder actions are intentionally inert until their flows are added.
 }
 
-export function LoginForm() {
+type LoginFormProps = {
+  onRegisterCompanyClick: () => void;
+};
+
+export function LoginForm({ onRegisterCompanyClick }: LoginFormProps) {
   const navigate = useNavigate();
 
   const [credentials, setCredentials] = useState<LoginCredentials>({
@@ -40,20 +44,15 @@ export function LoginForm() {
         password: credentials.password,
       });
 
-      console.log("Login Successful");
-      console.log(response.data);
-
       localStorage.setItem("access", response.data.access);
       localStorage.setItem("refresh", response.data.refresh);
 
       alert("Login Successful!");
 
       navigate("/dashboard");
-    } catch (error: any) {
-      console.error(error);
-
-      if (error.response) {
-        alert(error.response.data.detail);
+    } catch (error: unknown) {
+      if (axios.isAxiosError<{ detail?: string }>(error) && error.response) {
+        alert(error.response.data.detail ?? "Login failed.");
       } else {
         alert("Unable to connect to the server.");
       }
@@ -130,11 +129,11 @@ export function LoginForm() {
         <div className="grid gap-4 sm:grid-cols-2">
           <button
             type="button"
-            onClick={() => navigate("/register")}
+            onClick={onRegisterCompanyClick}
             className={inquiryActionClassName}
->
-            <UserPlus className="h-5 w-5" aria-hidden="true" />
-            <span>Register as New User</span>
+          >
+            <Building2 className="h-5 w-5" aria-hidden="true" />
+            <span>Register Company Profile</span>
           </button>
           <button
             type="button"
