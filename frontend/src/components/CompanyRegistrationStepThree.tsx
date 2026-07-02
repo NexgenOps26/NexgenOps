@@ -27,7 +27,6 @@ export function CompanyRegistrationStepThree({
         icon={Landmark}
         placeholder="1"
         required
-        variant="dark"
         value={data.numberOfSites}
         error={errors.numberOfSites}
         onBlur={() => onBlur("numberOfSites")}
@@ -44,7 +43,6 @@ export function CompanyRegistrationStepThree({
         icon={Building2}
         placeholder="1"
         required
-        variant="dark"
         value={data.totalBuildings}
         error={errors.totalBuildings}
         onBlur={() => onBlur("totalBuildings")}
@@ -61,7 +59,6 @@ export function CompanyRegistrationStepThree({
         icon={UsersRound}
         placeholder="0"
         required
-        variant="dark"
         value={data.coreRosterCount}
         error={errors.coreRosterCount}
         onBlur={() => onBlur("coreRosterCount")}
@@ -78,7 +75,6 @@ export function CompanyRegistrationStepThree({
         icon={CalendarRange}
         placeholder="0"
         required
-        variant="dark"
         value={data.workforceShifts}
         error={errors.workforceShifts}
         onBlur={() => onBlur("workforceShifts")}
@@ -96,7 +92,6 @@ export function CompanyRegistrationStepThree({
           icon={PackageSearch}
           placeholder="0"
           required
-          variant="dark"
           value={data.initialAssetsCount}
           error={errors.initialAssetsCount}
           onBlur={() => onBlur("initialAssetsCount")}

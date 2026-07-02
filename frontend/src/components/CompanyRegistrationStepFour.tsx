@@ -28,7 +28,6 @@ export function CompanyRegistrationStepFour({
           icon={UserCog}
           placeholder="Create an admin username"
           required
-          variant="dark"
           value={data.adminUsername}
           error={errors.adminUsername}
           onBlur={() => onBlur("adminUsername")}
@@ -42,7 +41,6 @@ export function CompanyRegistrationStepFour({
         label="Create Password *"
         placeholder="Minimum 8 characters"
         required
-        variant="dark"
         value={data.password}
         error={errors.password}
         onBlur={() => onBlur("password")}
@@ -55,7 +53,6 @@ export function CompanyRegistrationStepFour({
         label="Confirm Password *"
         placeholder="Re-enter password"
         required
-        variant="dark"
         value={data.confirmPassword}
         error={errors.confirmPassword}
         onBlur={() => onBlur("confirmPassword")}
@@ -63,12 +60,12 @@ export function CompanyRegistrationStepFour({
       />
 
       <div>
-        <span className="mb-2 block text-sm font-bold text-slate-200">
+        <span className="mb-2 block text-base font-bold text-slate-800 lg:text-sm xl:text-base">
           CAPTCHA Security Code
         </span>
-        <div className="flex h-[52px] items-center justify-between rounded-lg border border-slate-700 bg-slate-950/55 px-4 lg:h-[50px]">
+        <div className="flex h-[52px] items-center justify-between rounded-2xl border border-slate-300 bg-white/80 px-6 transition hover:border-slate-400 lg:h-[50px]">
           <span
-            className="font-mono text-lg font-black tracking-[0.12em] text-violet-200"
+            className="font-mono text-lg font-black tracking-[0.12em] text-blue-700"
             aria-live="polite"
           >
             {captchaQuestion}
@@ -76,7 +73,7 @@ export function CompanyRegistrationStepFour({
           <button
             type="button"
             aria-label="Refresh security code"
-            className="flex h-9 w-9 items-center justify-center rounded-full text-slate-400 transition hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-4 focus-visible:ring-violet-500/30"
+            className="flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition hover:bg-slate-100 hover:text-blue-700 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-600/30"
             onClick={onRefreshCaptcha}
           >
             <RefreshCw className="h-4 w-4" aria-hidden="true" />
@@ -93,7 +90,6 @@ export function CompanyRegistrationStepFour({
         icon={ShieldCheck}
         placeholder="Enter result"
         required
-        variant="dark"
         value={data.captchaAnswer}
         error={errors.captchaAnswer}
         onBlur={() => onBlur("captchaAnswer")}
@@ -101,12 +97,12 @@ export function CompanyRegistrationStepFour({
       />
 
       <div className="sm:col-span-2">
-        <label className="flex cursor-pointer items-start gap-3 rounded-lg border border-slate-700 bg-slate-950/40 p-4 text-sm leading-6 text-slate-300 transition hover:border-slate-600">
+        <label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-slate-300 bg-white/70 p-4 text-sm leading-6 text-slate-600 transition hover:border-blue-400 hover:bg-white">
           <input
             type="checkbox"
             name="acceptedTerms"
             required
-            className="mt-1 h-4 w-4 shrink-0 accent-violet-500 focus:outline-none focus-visible:ring-4 focus-visible:ring-violet-500/30"
+            className="mt-1 h-4 w-4 shrink-0 accent-blue-600 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-600/30"
             checked={data.acceptedTerms}
             aria-invalid={Boolean(errors.acceptedTerms)}
             aria-describedby={errors.acceptedTerms ? termsErrorId : undefined}
@@ -123,7 +119,7 @@ export function CompanyRegistrationStepFour({
         {errors.acceptedTerms && (
           <p
             id={termsErrorId}
-            className="mt-1.5 text-sm font-medium text-red-300"
+            className="mt-1.5 text-sm font-medium text-red-700"
             role="alert"
           >
             {errors.acceptedTerms}

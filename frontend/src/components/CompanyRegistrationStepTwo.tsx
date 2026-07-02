@@ -27,7 +27,6 @@ export function CompanyRegistrationStepTwo({
         icon={Contact}
         placeholder="Full name"
         required
-        variant="dark"
         value={data.contactOfficerName}
         error={errors.contactOfficerName}
         onBlur={() => onBlur("contactOfficerName")}
@@ -42,7 +41,6 @@ export function CompanyRegistrationStepTwo({
         icon={BriefcaseBusiness}
         placeholder="Facilities Director"
         required
-        variant="dark"
         value={data.corporateDesignation}
         error={errors.corporateDesignation}
         onBlur={() => onBlur("corporateDesignation")}
@@ -60,7 +58,6 @@ export function CompanyRegistrationStepTwo({
         icon={Phone}
         placeholder="+91 98765 43210"
         required
-        variant="dark"
         value={data.mobileContactPhone}
         error={errors.mobileContactPhone}
         onBlur={() => onBlur("mobileContactPhone")}
@@ -78,7 +75,6 @@ export function CompanyRegistrationStepTwo({
         icon={Mail}
         placeholder="admin@company.com"
         required
-        variant="dark"
         value={data.credentialsEmail}
         error={errors.credentialsEmail}
         onBlur={() => onBlur("credentialsEmail")}
@@ -93,7 +89,6 @@ export function CompanyRegistrationStepTwo({
           icon={Building}
           placeholder="Building, street, area"
           required
-          variant="dark"
           value={data.streetAddress}
           error={errors.streetAddress}
           onBlur={() => onBlur("streetAddress")}
@@ -108,7 +103,6 @@ export function CompanyRegistrationStepTwo({
         icon={MapPin}
         placeholder="City"
         required
-        variant="dark"
         value={data.city}
         error={errors.city}
         onBlur={() => onBlur("city")}
@@ -121,7 +115,6 @@ export function CompanyRegistrationStepTwo({
         label="State / Region"
         icon={MapPinned}
         placeholder="State or region"
-        variant="dark"
         value={data.stateRegion}
         error={errors.stateRegion}
         onBlur={() => onBlur("stateRegion")}
@@ -135,7 +128,6 @@ export function CompanyRegistrationStepTwo({
         label="Emergency No."
         icon={ShieldAlert}
         placeholder="Emergency contact"
-        variant="dark"
         value={data.emergencyNumber}
         error={errors.emergencyNumber}
         onBlur={() => onBlur("emergencyNumber")}
@@ -150,7 +142,6 @@ export function CompanyRegistrationStepTwo({
         icon={MapPin}
         placeholder="Postal code"
         required
-        variant="dark"
         value={data.postalCode}
         error={errors.postalCode}
         onBlur={() => onBlur("postalCode")}

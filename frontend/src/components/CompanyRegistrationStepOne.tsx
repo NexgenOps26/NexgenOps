@@ -25,7 +25,6 @@ export function CompanyRegistrationStepOne({
         icon={Building2}
         placeholder="Nexgen Facilities Pvt. Ltd."
         required
-        variant="dark"
         value={data.companyName}
         error={errors.companyName}
         onBlur={() => onBlur("companyName")}
@@ -38,7 +37,6 @@ export function CompanyRegistrationStepOne({
         icon={BriefcaseBusiness}
         placeholder="Private limited, enterprise..."
         required
-        variant="dark"
         value={data.companyType}
         error={errors.companyType}
         onBlur={() => onBlur("companyType")}
@@ -51,7 +49,6 @@ export function CompanyRegistrationStepOne({
         icon={Factory}
         placeholder="Manufacturing, healthcare..."
         required
-        variant="dark"
         value={data.industrySectors}
         error={errors.industrySectors}
         onBlur={() => onBlur("industrySectors")}
@@ -64,7 +61,6 @@ export function CompanyRegistrationStepOne({
         icon={BadgeCheck}
         placeholder="Enter GSTIN"
         required
-        variant="dark"
         value={data.gstNumber}
         error={errors.gstNumber}
         onBlur={() => onBlur("gstNumber")}
@@ -79,7 +75,6 @@ export function CompanyRegistrationStepOne({
         label="Optional Corporate Website"
         icon={Globe2}
         placeholder="https://company.example"
-        variant="dark"
         value={data.corporateWebsite}
         error={errors.corporateWebsite}
         onBlur={() => onBlur("corporateWebsite")}
@@ -95,7 +90,6 @@ export function CompanyRegistrationStepOne({
         icon={Mail}
         placeholder="operations@company.com"
         required
-        variant="dark"
         value={data.corporateWorkEmail}
         error={errors.corporateWorkEmail}
         onBlur={() => onBlur("corporateWorkEmail")}
@@ -114,7 +108,6 @@ export function CompanyRegistrationStepOne({
           icon={Phone}
           placeholder="+91 98765 43210"
           required
-          variant="dark"
           value={data.companyPhone}
           error={errors.companyPhone}
           onBlur={() => onBlur("companyPhone")}

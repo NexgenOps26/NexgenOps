@@ -1,6 +1,10 @@
 import type { FormEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, Check, LogIn } from "lucide-react";
+import { ArrowLeft, LogIn } from "lucide-react";
+import {
+  inquiryActionClassName,
+  PrimaryAction,
+} from "./AuthFormControls";
 import { CompanyRegistrationStepOne } from "./CompanyRegistrationStepOne";
 import { CompanyRegistrationStepTwo } from "./CompanyRegistrationStepTwo";
 import { CompanyRegistrationStepThree } from "./CompanyRegistrationStepThree";
@@ -277,18 +281,18 @@ export function CompanyRegistrationWizard({
   };
 
   return (
-    <div className="rounded-lg border border-white/10 bg-slate-900/85 p-5 shadow-[0_28px_80px_rgba(2,6,23,0.48)] backdrop-blur-xl sm:p-7">
+    <div className="rounded-2xl border border-[#E5E7EB] bg-white/90 p-5 shadow-[0_18px_50px_rgba(15,23,42,0.08)] sm:p-7">
       <header>
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.18em] text-violet-300">
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-700">
               Step {step + 1} of 4
             </p>
             <p className="mt-1 text-xs font-medium text-slate-500">
               Platform Provisioning
             </p>
           </div>
-          <span className="rounded-full border border-violet-400/20 bg-violet-400/10 px-3 py-1 text-xs font-bold text-violet-200">
+          <span className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">
             {Math.round(((step + 1) / stepTitles.length) * 100)}%
           </span>
         </div>
@@ -306,23 +310,23 @@ export function CompanyRegistrationWizard({
               key={title}
               className={`h-1.5 rounded-full transition-colors ${
                 index <= step
-                  ? "bg-gradient-to-r from-violet-500 to-blue-500"
-                  : "bg-slate-700"
+                  ? "bg-blue-600"
+                  : "bg-slate-200"
               }`}
             />
           ))}
         </div>
 
-        <h2 className="mt-6 text-2xl font-black text-white sm:text-3xl">
+        <h2 className="mt-6 text-3xl font-black leading-tight tracking-normal text-slate-900 sm:text-4xl lg:text-[2.15rem] xl:text-[2.35rem]">
           Onboarding Registration Form
         </h2>
-        <p className="mt-2 text-sm leading-6 text-slate-400">
+        <p className="mt-3 text-base font-medium leading-7 text-slate-600 lg:mt-2 lg:text-sm lg:leading-6 xl:text-base">
           Provide basic details to scaffold company workspaces.
         </p>
         <h3
           ref={stepHeadingRef}
           tabIndex={-1}
-          className="mt-5 text-base font-bold text-violet-200 outline-none sm:text-lg"
+          className="mt-5 text-base font-bold text-blue-700 outline-none sm:text-lg"
         >
           {stepTitles[step]}
         </h3>
@@ -346,7 +350,7 @@ export function CompanyRegistrationWizard({
           {step > 0 ? (
             <button
               type="button"
-              className="flex h-12 items-center justify-center gap-2 rounded-lg border border-slate-600 px-5 text-sm font-bold text-slate-200 transition hover:border-slate-400 hover:bg-white/5 focus:outline-none focus-visible:ring-4 focus-visible:ring-violet-500/30"
+              className={inquiryActionClassName}
               onClick={() => setStep((current) => current - 1)}
             >
               <ArrowLeft className="h-4 w-4" aria-hidden="true" />
@@ -354,33 +358,20 @@ export function CompanyRegistrationWizard({
             </button>
           ) : null}
 
-          <button
-            type="submit"
-            disabled={!isCurrentStepValid}
-            className="group flex h-12 flex-1 items-center justify-center gap-3 rounded-lg bg-gradient-to-r from-violet-600 to-blue-600 px-5 text-sm font-black text-white shadow-[0_16px_35px_rgba(79,70,229,0.28)] transition hover:-translate-y-0.5 hover:from-violet-500 hover:to-blue-500 focus:outline-none focus-visible:ring-4 focus-visible:ring-violet-400/40 disabled:cursor-not-allowed disabled:opacity-45 disabled:shadow-none disabled:hover:translate-y-0"
-          >
-            {step === stepTitles.length - 1 ? (
-              <>
-                <Check className="h-5 w-5" aria-hidden="true" />
-                Complete Registration
-              </>
-            ) : (
-              <>
-                Advance Form
-                <ArrowRight
-                  className="h-5 w-5 transition group-hover:translate-x-1 group-disabled:translate-x-0"
-                  aria-hidden="true"
-                />
-              </>
-            )}
-          </button>
+          <div className="flex-1">
+            <PrimaryAction disabled={!isCurrentStepValid}>
+              {step === stepTitles.length - 1
+                ? "Complete Registration"
+                : "Advance Form"}
+            </PrimaryAction>
+          </div>
         </div>
       </form>
 
-      <div className="mt-6 border-t border-white/10 pt-5 text-center">
+      <div className="mt-6 border-t border-slate-200 pt-5 text-center">
         <button
           type="button"
-          className="inline-flex items-center gap-2 rounded text-sm font-bold text-slate-400 transition hover:text-white focus:outline-none focus-visible:ring-4 focus-visible:ring-violet-500/30"
+          className="inline-flex items-center gap-2 rounded text-sm font-bold text-blue-700 transition hover:text-blue-900 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-600/30"
           onClick={onSignInClick}
         >
           <LogIn className="h-4 w-4" aria-hidden="true" />
