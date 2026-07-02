@@ -13,10 +13,18 @@ type AuthFieldProps = Omit<
   label: string;
   reserveErrorSpace?: boolean;
   trailingAction?: ReactNode;
+  variant?: "light" | "dark";
 };
 
-const inputClassName =
-  "h-[52px] w-full rounded-2xl border bg-white/80 pl-16 text-base font-medium text-slate-900 transition placeholder:text-slate-500 hover:border-slate-400 focus:border-blue-600 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-600/20 lg:h-[50px]";
+const inputBaseClassName =
+  "h-[52px] w-full rounded-lg border pl-12 text-base font-medium transition focus:outline-none focus-visible:ring-4 lg:h-[50px]";
+
+const inputVariantClassNames = {
+  light:
+    "bg-white/80 text-slate-900 placeholder:text-slate-500 hover:border-slate-400 focus:border-blue-600 focus-visible:ring-blue-600/20",
+  dark:
+    "bg-slate-950/55 text-white placeholder:text-slate-500 hover:border-slate-500 focus:border-violet-400 focus-visible:ring-violet-500/25",
+};
 
 export const secondaryActionClassName =
   "flex h-[54px] w-full items-center justify-center gap-3 rounded-2xl border border-slate-300 bg-white/70 text-base font-bold text-slate-800 transition hover:-translate-y-0.5 hover:border-blue-500 hover:bg-white hover:shadow-[0_16px_36px_rgba(37,99,235,0.14)] focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-600/30 lg:h-[52px] xl:text-lg";
@@ -31,21 +39,29 @@ export function AuthField({
   label,
   reserveErrorSpace = false,
   trailingAction,
+  variant = "light",
   ...inputProps
 }: AuthFieldProps) {
   const errorId = `${id}-error`;
+  const isDark = variant === "dark";
 
   return (
     <div>
       <label
-        className="mb-2 block text-base font-bold text-slate-800 lg:text-sm xl:text-base"
+        className={`mb-2 block text-sm font-bold ${
+          isDark ? "text-slate-200" : "text-slate-800 xl:text-base"
+        }`}
         htmlFor={id}
       >
         {label}
       </label>
       <div className="group relative">
         <Icon
-          className="pointer-events-none absolute left-6 top-1/2 h-6 w-6 -translate-y-1/2 text-slate-500 transition group-focus-within:text-blue-600"
+          className={`pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 transition ${
+            isDark
+              ? "text-slate-500 group-focus-within:text-violet-300"
+              : "text-slate-500 group-focus-within:text-blue-600"
+          }`}
           aria-hidden="true"
         />
         <input
@@ -53,12 +69,14 @@ export function AuthField({
           id={id}
           aria-describedby={error ? errorId : undefined}
           aria-invalid={Boolean(error)}
-          className={`${inputClassName} ${
+          className={`${inputBaseClassName} ${inputVariantClassNames[variant]} ${
             trailingAction ? "pr-16" : "pr-5"
           } ${
             error
-              ? "border-red-500 focus:border-red-600 focus-visible:ring-red-600/20"
-              : "border-slate-300"
+              ? "border-red-400 focus:border-red-400 focus-visible:ring-red-500/25"
+              : isDark
+                ? "border-slate-700"
+                : "border-slate-300"
           }`}
         />
         {trailingAction}
@@ -66,7 +84,9 @@ export function AuthField({
       {(error || reserveErrorSpace) && (
         <p
           id={errorId}
-          className="mt-1.5 min-h-5 text-sm font-medium text-red-700"
+          className={`mt-1.5 min-h-5 text-sm font-medium ${
+            isDark ? "text-red-300" : "text-red-700"
+          }`}
           role={error ? "alert" : undefined}
         >
           {error}
@@ -80,6 +100,7 @@ type PasswordFieldProps = Omit<AuthFieldProps, "icon" | "trailingAction" | "type
 
 export function PasswordField(props: PasswordFieldProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const isDark = props.variant === "dark";
 
   return (
     <AuthField
@@ -91,7 +112,11 @@ export function PasswordField(props: PasswordFieldProps) {
           type="button"
           aria-label={showPassword ? "Hide password" : "Show password"}
           aria-pressed={showPassword}
-          className="absolute right-5 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-600/30"
+          className={`absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full transition focus:outline-none focus-visible:ring-4 ${
+            isDark
+              ? "text-slate-400 hover:bg-white/10 hover:text-white focus-visible:ring-violet-500/30"
+              : "text-slate-500 hover:bg-slate-100 hover:text-slate-900 focus-visible:ring-blue-600/30"
+          }`}
           onClick={() => setShowPassword((value) => !value)}
         >
           {showPassword ? (
