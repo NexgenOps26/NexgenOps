@@ -67,16 +67,16 @@ export function LoginForm({ onRegisterCompanyClick }: LoginFormProps) {
   return (
     <>
       
-      <div className="mb-9 text-center sm:text-left lg:mb-5 xl:mb-6">
-        <h2 className="text-3xl font-black leading-tight tracking-normal text-slate-900 sm:text-4xl lg:text-[2.15rem] xl:text-[2.35rem]">
+      <div className="mb-6 text-center sm:text-left lg:mb-4">
+        <h2 className="text-[1.75rem] font-black leading-tight tracking-normal text-slate-900 sm:text-3xl lg:text-[1.9rem]">
           Sign in to Operations Command
         </h2>
-        <p className="mt-4 text-base font-medium leading-7 text-slate-600 sm:text-lg lg:mt-2 lg:text-sm lg:leading-6 xl:text-base">
+        <p className="mt-2 text-sm font-medium leading-6 text-slate-600">
           Access secure facility analytics and asset parameters.
         </p>
       </div>
 
-      <form className="space-y-5 lg:space-y-3 xl:space-y-4" onSubmit={handleSubmit}>
+      <form className="space-y-3" onSubmit={handleSubmit}>
         <AuthField
           id="login-username"
           name="username"
@@ -118,7 +118,7 @@ export function LoginForm({ onRegisterCompanyClick }: LoginFormProps) {
           onClick={() => handlePlaceholderAction("otp")}
           className={secondaryActionClassName}
         >
-          <Smartphone className="h-5 w-5 xl:h-6 xl:w-6" aria-hidden="true" />
+          <Smartphone className="h-5 w-5" aria-hidden="true" />
           <span>Login with OTP (Mobile/Email)</span>
         </button>
 
@@ -126,7 +126,7 @@ export function LoginForm({ onRegisterCompanyClick }: LoginFormProps) {
 
         <Divider label="New Users & Inquiries" />
 
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-3 sm:grid-cols-2">
           <button
             type="button"
             onClick={onRegisterCompanyClick}
