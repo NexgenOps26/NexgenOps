@@ -42,29 +42,29 @@ const features: Feature[] = [
 
 export function FeatureGrid() {
   return (
-    <div className="grid gap-x-8 gap-y-7 sm:grid-cols-2 lg:gap-x-6 lg:gap-y-4 xl:gap-x-8 xl:gap-y-5 2xl:gap-x-10 2xl:gap-y-7">
+    <div className="grid gap-x-6 gap-y-5 sm:grid-cols-2 lg:gap-x-5 lg:gap-y-3 xl:gap-x-6 xl:gap-y-4 2xl:gap-x-8 2xl:gap-y-5">
       {features.map((feature) => {
         const Icon = feature.icon;
 
         return (
           <article
             key={feature.title}
-            className="flex min-w-0 items-start gap-5 lg:gap-3 2xl:gap-4"
+            className="flex min-w-0 items-start gap-4 lg:gap-2.5 xl:gap-3"
           >
             <div
-              className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br shadow-lg lg:h-10 lg:w-10 2xl:h-14 2xl:w-14 ${feature.accent}`}
+              className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br shadow-lg lg:h-9 lg:w-9 xl:h-10 xl:w-10 2xl:h-12 2xl:w-12 ${feature.accent}`}
               aria-hidden="true"
             >
               <Icon
-                className={`h-7 w-7 lg:h-5 lg:w-5 2xl:h-7 2xl:w-7 ${feature.iconColor}`}
+                className={`h-6 w-6 lg:h-[18px] lg:w-[18px] xl:h-5 xl:w-5 2xl:h-6 2xl:w-6 ${feature.iconColor}`}
                 strokeWidth={2.1}
               />
             </div>
             <div className="min-w-0">
-              <h3 className="text-base font-bold leading-snug text-white lg:text-sm 2xl:text-base">
+              <h3 className="text-sm font-bold leading-snug text-white lg:text-xs xl:text-sm 2xl:text-base">
                 {feature.title}
               </h3>
-              <p className="mt-2 text-[0.96rem] leading-7 text-slate-300 lg:mt-1 lg:text-[0.8rem] lg:leading-5 xl:text-[0.86rem] xl:leading-6 2xl:mt-2 2xl:text-[0.96rem] 2xl:leading-7">
+              <p className="brand-feature-description mt-1.5 text-sm leading-6 text-slate-300 lg:mt-0.5 lg:text-[0.72rem] lg:leading-4 xl:text-xs xl:leading-5 2xl:mt-1 2xl:text-sm 2xl:leading-6">
                 {feature.description}
               </p>
             </div>
