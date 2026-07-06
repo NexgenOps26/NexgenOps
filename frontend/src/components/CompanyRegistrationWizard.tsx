@@ -9,204 +9,215 @@ import { CompanyRegistrationStepOne } from "./CompanyRegistrationStepOne";
 import { CompanyRegistrationStepTwo } from "./CompanyRegistrationStepTwo";
 import { CompanyRegistrationStepThree } from "./CompanyRegistrationStepThree";
 import { CompanyRegistrationStepFour } from "./CompanyRegistrationStepFour";
-import type {
-  CompanyRegistrationData,
-  CompanyRegistrationErrors,
-  CompanyRegistrationField,
-  UpdateCompanyRegistrationField,
+import {
+  toCompanyRegistrationPayload,
+  type CompanyRegistrationErrors,
+  type CompanyRegistrationField,
+  type CompanyRegistrationFormState,
+  type CompanyRegistrationPayload,
+  type UpdateCompanyRegistrationField,
 } from "./CompanyRegistrationTypes";
 
-export type { CompanyRegistrationData } from "./CompanyRegistrationTypes";
+export {
+  toCompanyRegistrationPayload,
+  type CompanyRegistrationFormState,
+  type CompanyRegistrationPayload,
+} from "./CompanyRegistrationTypes";
 
 type CompanyRegistrationWizardProps = {
-  onRegisterCompany: (data: CompanyRegistrationData) => void;
+  onRegisterCompany: (payload: CompanyRegistrationPayload) => void;
   onSignInClick: () => void;
-};
-
-type Captcha = {
-  answer: number;
-  question: string;
 };
 
 const stepTitles = [
   "Company Details",
   "Primary Contact Person & Corporate Info",
   "Corporate Facility & Demographics Info",
-  "Portal Credentials Creation",
+  "Review & Terms Acceptance",
 ] as const;
 
 const stepFields: CompanyRegistrationField[][] = [
   [
-    "companyName",
-    "companyType",
-    "industrySectors",
-    "gstNumber",
-    "corporateWebsite",
-    "corporateWorkEmail",
-    "companyPhone",
+    "company_name",
+    "company_type",
+    "industry_sector",
+    "gst_identification_number",
+    "corporate_website",
+    "corporate_work_email",
+    "company_phone",
   ],
   [
-    "contactOfficerName",
-    "corporateDesignation",
-    "mobileContactPhone",
-    "credentialsEmail",
-    "streetAddress",
+    "contact_officer_full_name",
+    "corporate_designation",
+    "mobile_contact_phone",
+    "credentials_outbox_email",
+    "detailed_street_address",
     "city",
-    "stateRegion",
-    "emergencyNumber",
-    "postalCode",
+    "state_region",
+    "emergency_number",
+    "postal_pincode",
   ],
   [
-    "numberOfSites",
-    "totalBuildings",
-    "coreRosterCount",
-    "workforceShifts",
-    "initialAssetsCount",
+    "number_of_sites",
+    "total_buildings_complex",
+    "pre_onboarded_core_roster_count",
+    "workforce_shifts_strength",
+    "initial_facility_assets_count",
   ],
-  [
-    "adminUsername",
-    "password",
-    "confirmPassword",
-    "captchaAnswer",
-    "acceptedTerms",
-  ],
+  ["terms_accepted"],
 ];
 
-const initialData: CompanyRegistrationData = {
-  companyName: "",
-  companyType: "",
-  industrySectors: "",
-  gstNumber: "",
-  corporateWebsite: "",
-  corporateWorkEmail: "",
-  companyPhone: "",
-  contactOfficerName: "",
-  corporateDesignation: "",
-  mobileContactPhone: "",
-  credentialsEmail: "",
-  streetAddress: "",
+const initialData: CompanyRegistrationFormState = {
+  company_name: "",
+  company_type: "",
+  industry_sector: "",
+  gst_identification_number: "",
+  corporate_website: "",
+  corporate_work_email: "",
+  company_phone: "",
+  contact_officer_full_name: "",
+  corporate_designation: "",
+  mobile_contact_phone: "",
+  credentials_outbox_email: "",
+  detailed_street_address: "",
   city: "",
-  stateRegion: "",
-  emergencyNumber: "",
-  postalCode: "",
-  numberOfSites: "",
-  totalBuildings: "",
-  coreRosterCount: "",
-  workforceShifts: "",
-  initialAssetsCount: "",
-  adminUsername: "",
-  password: "",
-  confirmPassword: "",
-  captchaAnswer: "",
-  acceptedTerms: false,
+  state_region: "",
+  emergency_number: "",
+  postal_pincode: "",
+  number_of_sites: "",
+  total_buildings_complex: "",
+  pre_onboarded_core_roster_count: "",
+  workforce_shifts_strength: "",
+  initial_facility_assets_count: "",
+  terms_accepted: false,
 };
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const nonNegativeIntegerPattern = /^\d+$/;
 
-function createCaptcha(): Captcha {
-  const left = Math.floor(Math.random() * 8) + 2;
-  const right = Math.floor(Math.random() * 8) + 2;
-
-  return {
-    answer: left + right,
-    question: `${left} + ${right} = ?`,
-  };
+function isValidWebsite(value: string): boolean {
+  try {
+    const url = new URL(value);
+    return (
+      ["http:", "https:", "ftp:", "ftps:"].includes(url.protocol) &&
+      Boolean(url.hostname)
+    );
+  } catch {
+    return false;
+  }
 }
 
 function validateRegistration(
-  data: CompanyRegistrationData,
-  captchaAnswer: number,
+  data: CompanyRegistrationFormState,
 ): CompanyRegistrationErrors {
   const errors: CompanyRegistrationErrors = {};
 
   const requireText = (
-    field: Exclude<CompanyRegistrationField, "acceptedTerms">,
-    message: string,
-  ) => {
-    if (!data[field].trim()) {
-      errors[field] = message;
-    }
-  };
-
-  requireText("companyName", "Company name is required.");
-  requireText("companyType", "Company type is required.");
-  requireText("industrySectors", "Industry sector is required.");
-  requireText("gstNumber", "GST identification number is required.");
-  requireText("corporateWorkEmail", "Corporate work email is required.");
-  requireText("companyPhone", "Company phone is required.");
-
-  if (
-    data.corporateWorkEmail &&
-    !emailPattern.test(data.corporateWorkEmail.trim())
-  ) {
-    errors.corporateWorkEmail = "Enter a valid corporate email address.";
-  }
-
-  requireText("contactOfficerName", "Contact officer name is required.");
-  requireText("corporateDesignation", "Corporate designation is required.");
-  requireText("mobileContactPhone", "Mobile contact phone is required.");
-  requireText("credentialsEmail", "Credentials email is required.");
-  requireText("streetAddress", "Street address is required.");
-  requireText("city", "City is required.");
-  requireText("postalCode", "Postal code is required.");
-
-  if (
-    data.credentialsEmail &&
-    !emailPattern.test(data.credentialsEmail.trim())
-  ) {
-    errors.credentialsEmail = "Enter a valid credentials email address.";
-  }
-
-  const validateCount = (
-    field:
-      | "numberOfSites"
-      | "totalBuildings"
-      | "coreRosterCount"
-      | "workforceShifts"
-      | "initialAssetsCount",
+    field: Exclude<CompanyRegistrationField, "terms_accepted">,
     label: string,
-    minimum: number,
+    maxLength?: number,
   ) => {
     const value = data[field].trim();
     if (!value) {
       errors[field] = `${label} is required.`;
+    } else if (maxLength && value.length > maxLength) {
+      errors[field] = `${label} must be ${maxLength} characters or fewer.`;
+    }
+  };
+
+  requireText("company_name", "Company name", 255);
+  requireText("company_type", "Company type", 100);
+  requireText("industry_sector", "Industry sector", 150);
+  requireText(
+    "gst_identification_number",
+    "GST identification number",
+    50,
+  );
+  requireText("corporate_work_email", "Corporate work email", 254);
+  requireText("company_phone", "Company phone", 20);
+
+  const corporateWebsite = data.corporate_website.trim();
+  if (corporateWebsite.length > 200) {
+    errors.corporate_website =
+      "Corporate website must be 200 characters or fewer.";
+  } else if (corporateWebsite && !isValidWebsite(corporateWebsite)) {
+    errors.corporate_website = "Enter a valid corporate website URL.";
+  }
+
+  if (
+    data.corporate_work_email.trim() &&
+    !emailPattern.test(data.corporate_work_email.trim())
+  ) {
+    errors.corporate_work_email =
+      "Enter a valid corporate email address.";
+  }
+
+  requireText("contact_officer_full_name", "Contact officer name", 255);
+  requireText("corporate_designation", "Corporate designation", 150);
+  requireText("mobile_contact_phone", "Mobile contact phone", 20);
+  requireText("credentials_outbox_email", "Credentials email", 254);
+  requireText("detailed_street_address", "Street address");
+  requireText("city", "City", 100);
+  requireText("state_region", "State or region", 100);
+  requireText("postal_pincode", "Postal or pincode", 20);
+
+  if (
+    data.credentials_outbox_email.trim() &&
+    !emailPattern.test(data.credentials_outbox_email.trim())
+  ) {
+    errors.credentials_outbox_email =
+      "Enter a valid credentials email address.";
+  }
+
+  if (data.emergency_number.trim().length > 20) {
+    errors.emergency_number =
+      "Emergency number must be 20 characters or fewer.";
+  }
+
+  const validateCount = (
+    field:
+      | "number_of_sites"
+      | "total_buildings_complex"
+      | "pre_onboarded_core_roster_count"
+      | "workforce_shifts_strength"
+      | "initial_facility_assets_count",
+    label: string,
+    minimum: number,
+  ) => {
+    const value = data[field].trim();
+    const numericValue = Number(value);
+
+    if (!value) {
+      errors[field] = `${label} is required.`;
     } else if (
       !nonNegativeIntegerPattern.test(value) ||
-      Number(value) < minimum
+      !Number.isSafeInteger(numericValue) ||
+      numericValue < minimum
     ) {
       errors[field] = `Enter a whole number of ${minimum} or more.`;
     }
   };
 
-  validateCount("numberOfSites", "Number of sites", 1);
-  validateCount("totalBuildings", "Total buildings", 1);
-  validateCount("coreRosterCount", "Core roster count", 0);
-  validateCount("workforceShifts", "Workforce shifts strength", 0);
-  validateCount("initialAssetsCount", "Initial assets count", 0);
+  validateCount("number_of_sites", "Number of sites", 0);
+  validateCount("total_buildings_complex", "Total buildings", 0);
+  validateCount(
+    "pre_onboarded_core_roster_count",
+    "Core roster count",
+    0,
+  );
+  validateCount(
+    "workforce_shifts_strength",
+    "Workforce shifts strength",
+    0,
+  );
+  validateCount(
+    "initial_facility_assets_count",
+    "Initial assets count",
+    0,
+  );
 
-  requireText("adminUsername", "Admin username is required.");
-
-  if (!data.password) {
-    errors.password = "Password is required.";
-  } else if (data.password.length < 8) {
-    errors.password = "Password must be at least 8 characters.";
-  }
-
-  if (!data.confirmPassword) {
-    errors.confirmPassword = "Confirm your password.";
-  } else if (data.confirmPassword !== data.password) {
-    errors.confirmPassword = "Passwords do not match.";
-  }
-
-  if (!data.captchaAnswer.trim()) {
-    errors.captchaAnswer = "Security code result is required.";
-  } else if (Number(data.captchaAnswer) !== captchaAnswer) {
-    errors.captchaAnswer = "Security code result is incorrect.";
-  }
-
-  if (!data.acceptedTerms) {
-    errors.acceptedTerms = "You must accept the terms to continue.";
+  if (!data.terms_accepted) {
+    errors.terms_accepted = "You must accept the terms to continue.";
   }
 
   return errors;
@@ -216,18 +227,15 @@ export function CompanyRegistrationWizard({
   onRegisterCompany,
   onSignInClick,
 }: CompanyRegistrationWizardProps) {
-  const [data, setData] = useState<CompanyRegistrationData>(initialData);
+  const [data, setData] =
+    useState<CompanyRegistrationFormState>(initialData);
   const [step, setStep] = useState(0);
   const [touched, setTouched] = useState<
     Partial<Record<CompanyRegistrationField, boolean>>
   >({});
-  const [captcha, setCaptcha] = useState<Captcha>(createCaptcha);
   const stepHeadingRef = useRef<HTMLHeadingElement>(null);
 
-  const errors = useMemo(
-    () => validateRegistration(data, captcha.answer),
-    [captcha.answer, data],
-  );
+  const errors = useMemo(() => validateRegistration(data), [data]);
   const currentFields = stepFields[step];
   const isCurrentStepValid = currentFields.every((field) => !errors[field]);
   const visibleErrors = Object.fromEntries(
@@ -248,12 +256,6 @@ export function CompanyRegistrationWizard({
     setTouched((current) => ({ ...current, [field]: true }));
   }
 
-  function refreshCaptcha() {
-    setCaptcha(createCaptcha());
-    setData((current) => ({ ...current, captchaAnswer: "" }));
-    setTouched((current) => ({ ...current, captchaAnswer: false }));
-  }
-
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -270,7 +272,7 @@ export function CompanyRegistrationWizard({
       return;
     }
 
-    onRegisterCompany(data);
+    onRegisterCompany(toCompanyRegistrationPayload(data));
   }
 
   const sharedStepProps = {
@@ -309,9 +311,7 @@ export function CompanyRegistrationWizard({
             <div
               key={title}
               className={`h-1.5 rounded-full transition-colors ${
-                index <= step
-                  ? "bg-blue-600"
-                  : "bg-slate-200"
+                index <= step ? "bg-blue-600" : "bg-slate-200"
               }`}
             />
           ))}
@@ -336,13 +336,11 @@ export function CompanyRegistrationWizard({
         <div key={step} className="wizard-step-enter">
           {step === 0 && <CompanyRegistrationStepOne {...sharedStepProps} />}
           {step === 1 && <CompanyRegistrationStepTwo {...sharedStepProps} />}
-          {step === 2 && <CompanyRegistrationStepThree {...sharedStepProps} />}
+          {step === 2 && (
+            <CompanyRegistrationStepThree {...sharedStepProps} />
+          )}
           {step === 3 && (
-            <CompanyRegistrationStepFour
-              {...sharedStepProps}
-              captchaQuestion={captcha.question}
-              onRefreshCaptcha={refreshCaptcha}
-            />
+            <CompanyRegistrationStepFour {...sharedStepProps} />
           )}
         </div>
 
