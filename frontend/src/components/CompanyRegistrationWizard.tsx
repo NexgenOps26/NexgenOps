@@ -283,8 +283,8 @@ export function CompanyRegistrationWizard({
   };
 
   return (
-    <div className="rounded-2xl border border-[#E5E7EB] bg-white/90 p-5 shadow-[0_18px_50px_rgba(15,23,42,0.08)] sm:p-7">
-      <header>
+    <div className="flex flex-col rounded-2xl border border-[#E5E7EB] bg-white/90 p-4 shadow-[0_18px_50px_rgba(15,23,42,0.08)] sm:p-5 lg:max-h-[calc(100vh-32px)] lg:overflow-hidden lg:p-4 2xl:p-5">
+      <header className="shrink-0">
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-700">
@@ -300,7 +300,7 @@ export function CompanyRegistrationWizard({
         </div>
 
         <div
-          className="mt-4 grid grid-cols-4 gap-2"
+          className="mt-3 grid grid-cols-4 gap-2"
           role="progressbar"
           aria-label="Company registration progress"
           aria-valuemin={1}
@@ -310,30 +310,37 @@ export function CompanyRegistrationWizard({
           {stepTitles.map((title, index) => (
             <div
               key={title}
-              className={`h-1.5 rounded-full transition-colors ${
+              className={`h-1 rounded-full transition-colors ${
                 index <= step ? "bg-blue-600" : "bg-slate-200"
               }`}
             />
           ))}
         </div>
 
-        <h2 className="mt-6 text-3xl font-black leading-tight tracking-normal text-slate-900 sm:text-4xl lg:text-[2.15rem] xl:text-[2.35rem]">
+        <h2 className="mt-4 text-2xl font-black leading-tight tracking-normal text-slate-900 sm:text-3xl lg:text-[1.75rem]">
           Onboarding Registration Form
         </h2>
-        <p className="mt-3 text-base font-medium leading-7 text-slate-600 lg:mt-2 lg:text-sm lg:leading-6 xl:text-base">
+        <p className="mt-1.5 text-sm font-medium leading-5 text-slate-600">
           Provide basic details to scaffold company workspaces.
         </p>
         <h3
           ref={stepHeadingRef}
           tabIndex={-1}
-          className="mt-5 text-base font-bold text-blue-700 outline-none sm:text-lg"
+          className="mt-3 text-sm font-bold text-blue-700 outline-none sm:text-base"
         >
           {stepTitles[step]}
         </h3>
       </header>
 
-      <form className="mt-5" noValidate onSubmit={handleSubmit}>
-        <div key={step} className="wizard-step-enter">
+      <form
+        className="mt-2.5 flex min-h-0 flex-col lg:flex-1"
+        noValidate
+        onSubmit={handleSubmit}
+      >
+        <div
+          key={step}
+          className="wizard-form-scroll wizard-step-enter min-h-0 lg:flex-1 lg:overflow-y-auto lg:pr-1.5"
+        >
           {step === 0 && <CompanyRegistrationStepOne {...sharedStepProps} />}
           {step === 1 && <CompanyRegistrationStepTwo {...sharedStepProps} />}
           {step === 2 && (
@@ -344,7 +351,7 @@ export function CompanyRegistrationWizard({
           )}
         </div>
 
-        <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:items-center">
+        <div className="mt-3 flex shrink-0 flex-col-reverse gap-3 sm:flex-row sm:items-center">
           {step > 0 ? (
             <button
               type="button"
@@ -366,7 +373,7 @@ export function CompanyRegistrationWizard({
         </div>
       </form>
 
-      <div className="mt-6 border-t border-slate-200 pt-5 text-center">
+      <div className="mt-3 shrink-0 border-t border-slate-200 pt-2.5 text-center">
         <button
           type="button"
           className="inline-flex items-center gap-2 rounded text-sm font-bold text-blue-700 transition hover:text-blue-900 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-600/30"

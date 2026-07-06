@@ -21,9 +21,9 @@ export function CompanyRegistrationStepFour({
   ] as const;
 
   return (
-    <div className="grid gap-5">
+    <div className="grid gap-4">
       <section
-        className="rounded-2xl border border-slate-200 bg-slate-50/80 p-4"
+        className="rounded-xl border border-slate-200 bg-slate-50/80 p-3.5"
         aria-labelledby="registration-review-heading"
       >
         <h4
@@ -32,7 +32,7 @@ export function CompanyRegistrationStepFour({
         >
           Registration summary
         </h4>
-        <dl className="mt-3 grid gap-x-6 gap-y-3 sm:grid-cols-2">
+        <dl className="mt-2.5 grid gap-x-5 gap-y-2.5 sm:grid-cols-2">
           {reviewItems.map(([label, value]) => (
             <div key={label} className="min-w-0">
               <dt className="text-xs font-bold text-slate-500">{label}</dt>
@@ -42,13 +42,13 @@ export function CompanyRegistrationStepFour({
             </div>
           ))}
         </dl>
-        <p className="mt-4 text-sm leading-6 text-slate-600">
+        <p className="mt-3 text-xs leading-5 text-slate-600">
           Use Back to correct any information before completing registration.
         </p>
       </section>
 
       <div>
-        <label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-slate-300 bg-white/70 p-4 text-sm leading-6 text-slate-600 transition hover:border-blue-400 hover:bg-white">
+        <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-slate-300 bg-white/70 p-3.5 text-sm leading-5 text-slate-600 transition hover:border-blue-400 hover:bg-white">
           <input
             type="checkbox"
             name="terms_accepted"

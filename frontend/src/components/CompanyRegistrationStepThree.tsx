@@ -15,7 +15,7 @@ export function CompanyRegistrationStepThree({
   onChange,
 }: CompanyRegistrationStepProps) {
   return (
-    <div className="grid gap-4 sm:grid-cols-2">
+    <div className="grid gap-3 sm:grid-cols-2">
       <AuthField
         id="number-of-sites"
         name="number_of_sites"
