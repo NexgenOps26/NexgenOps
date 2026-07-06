@@ -2,13 +2,13 @@ import { useState } from "react";
 import { BrandPanel } from "./BrandPanel";
 import {
   CompanyRegistrationWizard,
-  type CompanyRegistrationData,
+  type CompanyRegistrationPayload,
 } from "./CompanyRegistrationWizard";
 import { LoginForm } from "./LoginForm";
 
 type AuthMode = "login" | "register";
 
-function handleRegisterCompany(_data: CompanyRegistrationData) {
+function handleRegisterCompany(_payload: CompanyRegistrationPayload) {
   // Frontend-only boundary for the future company registration API.
 }
 
