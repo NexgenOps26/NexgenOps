@@ -24,6 +24,7 @@ body,
 body {
   margin: 0;
   min-width: 320px;
+  overflow-x: hidden;
 }
 
 button,
@@ -45,6 +46,36 @@ button:disabled {
 
 .wizard-step-enter {
   animation: wizard-step-enter 180ms ease-out both;
+}
+
+.wizard-form-scroll {
+  scrollbar-color: #cbd5e1 transparent;
+  scrollbar-width: thin;
+}
+
+.wizard-form-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.wizard-form-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.wizard-form-scroll::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: #cbd5e1;
+}
+
+@media (min-width: 1024px) and (max-height: 700px) {
+  .brand-description,
+  .brand-feature-description,
+  .brand-footer-secondary {
+    display: none;
+  }
+
+  .brand-panel footer {
+    padding-top: 0.625rem;
+  }
 }
 
 @keyframes auth-form-enter {
