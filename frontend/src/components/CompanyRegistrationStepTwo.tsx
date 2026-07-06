@@ -21,36 +21,36 @@ export function CompanyRegistrationStepTwo({
     <div className="grid gap-4 sm:grid-cols-2">
       <AuthField
         id="contact-officer-name"
-        name="contactOfficerName"
+        name="contact_officer_full_name"
         autoComplete="name"
         label="Contact Officer Full Name *"
         icon={Contact}
         placeholder="Full name"
         required
-        value={data.contactOfficerName}
-        error={errors.contactOfficerName}
-        onBlur={() => onBlur("contactOfficerName")}
+        value={data.contact_officer_full_name}
+        error={errors.contact_officer_full_name}
+        onBlur={() => onBlur("contact_officer_full_name")}
         onChange={(event) =>
-          onChange("contactOfficerName", event.target.value)
+          onChange("contact_officer_full_name", event.target.value)
         }
       />
       <AuthField
         id="corporate-designation"
-        name="corporateDesignation"
+        name="corporate_designation"
         label="Corporate Designation *"
         icon={BriefcaseBusiness}
         placeholder="Facilities Director"
         required
-        value={data.corporateDesignation}
-        error={errors.corporateDesignation}
-        onBlur={() => onBlur("corporateDesignation")}
+        value={data.corporate_designation}
+        error={errors.corporate_designation}
+        onBlur={() => onBlur("corporate_designation")}
         onChange={(event) =>
-          onChange("corporateDesignation", event.target.value)
+          onChange("corporate_designation", event.target.value)
         }
       />
       <AuthField
         id="mobile-contact-phone"
-        name="mobileContactPhone"
+        name="mobile_contact_phone"
         type="tel"
         inputMode="tel"
         autoComplete="tel"
@@ -58,16 +58,16 @@ export function CompanyRegistrationStepTwo({
         icon={Phone}
         placeholder="+91 98765 43210"
         required
-        value={data.mobileContactPhone}
-        error={errors.mobileContactPhone}
-        onBlur={() => onBlur("mobileContactPhone")}
+        value={data.mobile_contact_phone}
+        error={errors.mobile_contact_phone}
+        onBlur={() => onBlur("mobile_contact_phone")}
         onChange={(event) =>
-          onChange("mobileContactPhone", event.target.value)
+          onChange("mobile_contact_phone", event.target.value)
         }
       />
       <AuthField
         id="credentials-email"
-        name="credentialsEmail"
+        name="credentials_outbox_email"
         type="email"
         inputMode="email"
         autoComplete="email"
@@ -75,24 +75,28 @@ export function CompanyRegistrationStepTwo({
         icon={Mail}
         placeholder="admin@company.com"
         required
-        value={data.credentialsEmail}
-        error={errors.credentialsEmail}
-        onBlur={() => onBlur("credentialsEmail")}
-        onChange={(event) => onChange("credentialsEmail", event.target.value)}
+        value={data.credentials_outbox_email}
+        error={errors.credentials_outbox_email}
+        onBlur={() => onBlur("credentials_outbox_email")}
+        onChange={(event) =>
+          onChange("credentials_outbox_email", event.target.value)
+        }
       />
       <div className="sm:col-span-2">
         <AuthField
           id="street-address"
-          name="streetAddress"
+          name="detailed_street_address"
           autoComplete="street-address"
           label="Detailed Street Address *"
           icon={Building}
           placeholder="Building, street, area"
           required
-          value={data.streetAddress}
-          error={errors.streetAddress}
-          onBlur={() => onBlur("streetAddress")}
-          onChange={(event) => onChange("streetAddress", event.target.value)}
+          value={data.detailed_street_address}
+          error={errors.detailed_street_address}
+          onBlur={() => onBlur("detailed_street_address")}
+          onChange={(event) =>
+            onChange("detailed_street_address", event.target.value)
+          }
         />
       </div>
       <AuthField
@@ -110,42 +114,47 @@ export function CompanyRegistrationStepTwo({
       />
       <AuthField
         id="state-region"
-        name="stateRegion"
+        name="state_region"
         autoComplete="address-level1"
-        label="State / Region"
+        label="State / Region *"
         icon={MapPinned}
         placeholder="State or region"
-        value={data.stateRegion}
-        error={errors.stateRegion}
-        onBlur={() => onBlur("stateRegion")}
-        onChange={(event) => onChange("stateRegion", event.target.value)}
+        required
+        value={data.state_region}
+        error={errors.state_region}
+        onBlur={() => onBlur("state_region")}
+        onChange={(event) => onChange("state_region", event.target.value)}
       />
       <AuthField
         id="emergency-number"
-        name="emergencyNumber"
+        name="emergency_number"
         type="tel"
         inputMode="tel"
         label="Emergency No."
         icon={ShieldAlert}
         placeholder="Emergency contact"
-        value={data.emergencyNumber}
-        error={errors.emergencyNumber}
-        onBlur={() => onBlur("emergencyNumber")}
-        onChange={(event) => onChange("emergencyNumber", event.target.value)}
+        value={data.emergency_number}
+        error={errors.emergency_number}
+        onBlur={() => onBlur("emergency_number")}
+        onChange={(event) =>
+          onChange("emergency_number", event.target.value)
+        }
       />
       <AuthField
         id="postal-code"
-        name="postalCode"
+        name="postal_pincode"
         inputMode="numeric"
         autoComplete="postal-code"
         label="Postal/Pincode *"
         icon={MapPin}
         placeholder="Postal code"
         required
-        value={data.postalCode}
-        error={errors.postalCode}
-        onBlur={() => onBlur("postalCode")}
-        onChange={(event) => onChange("postalCode", event.target.value)}
+        value={data.postal_pincode}
+        error={errors.postal_pincode}
+        onBlur={() => onBlur("postal_pincode")}
+        onChange={(event) =>
+          onChange("postal_pincode", event.target.value)
+        }
       />
     </div>
   );

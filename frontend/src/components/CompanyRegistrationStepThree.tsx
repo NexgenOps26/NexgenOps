@@ -18,39 +18,43 @@ export function CompanyRegistrationStepThree({
     <div className="grid gap-4 sm:grid-cols-2">
       <AuthField
         id="number-of-sites"
-        name="numberOfSites"
+        name="number_of_sites"
         type="number"
         inputMode="numeric"
-        min="1"
+        min="0"
         step="1"
         label="Number of Sites / Campuses *"
         icon={Landmark}
         placeholder="1"
         required
-        value={data.numberOfSites}
-        error={errors.numberOfSites}
-        onBlur={() => onBlur("numberOfSites")}
-        onChange={(event) => onChange("numberOfSites", event.target.value)}
+        value={data.number_of_sites}
+        error={errors.number_of_sites}
+        onBlur={() => onBlur("number_of_sites")}
+        onChange={(event) =>
+          onChange("number_of_sites", event.target.value)
+        }
       />
       <AuthField
         id="total-buildings"
-        name="totalBuildings"
+        name="total_buildings_complex"
         type="number"
         inputMode="numeric"
-        min="1"
+        min="0"
         step="1"
         label="Total Buildings Complex *"
         icon={Building2}
         placeholder="1"
         required
-        value={data.totalBuildings}
-        error={errors.totalBuildings}
-        onBlur={() => onBlur("totalBuildings")}
-        onChange={(event) => onChange("totalBuildings", event.target.value)}
+        value={data.total_buildings_complex}
+        error={errors.total_buildings_complex}
+        onBlur={() => onBlur("total_buildings_complex")}
+        onChange={(event) =>
+          onChange("total_buildings_complex", event.target.value)
+        }
       />
       <AuthField
         id="core-roster-count"
-        name="coreRosterCount"
+        name="pre_onboarded_core_roster_count"
         type="number"
         inputMode="numeric"
         min="0"
@@ -59,14 +63,19 @@ export function CompanyRegistrationStepThree({
         icon={UsersRound}
         placeholder="0"
         required
-        value={data.coreRosterCount}
-        error={errors.coreRosterCount}
-        onBlur={() => onBlur("coreRosterCount")}
-        onChange={(event) => onChange("coreRosterCount", event.target.value)}
+        value={data.pre_onboarded_core_roster_count}
+        error={errors.pre_onboarded_core_roster_count}
+        onBlur={() => onBlur("pre_onboarded_core_roster_count")}
+        onChange={(event) =>
+          onChange(
+            "pre_onboarded_core_roster_count",
+            event.target.value,
+          )
+        }
       />
       <AuthField
         id="workforce-shifts"
-        name="workforceShifts"
+        name="workforce_shifts_strength"
         type="number"
         inputMode="numeric"
         min="0"
@@ -75,15 +84,17 @@ export function CompanyRegistrationStepThree({
         icon={CalendarRange}
         placeholder="0"
         required
-        value={data.workforceShifts}
-        error={errors.workforceShifts}
-        onBlur={() => onBlur("workforceShifts")}
-        onChange={(event) => onChange("workforceShifts", event.target.value)}
+        value={data.workforce_shifts_strength}
+        error={errors.workforce_shifts_strength}
+        onBlur={() => onBlur("workforce_shifts_strength")}
+        onChange={(event) =>
+          onChange("workforce_shifts_strength", event.target.value)
+        }
       />
       <div className="sm:col-span-2">
         <AuthField
           id="initial-assets-count"
-          name="initialAssetsCount"
+          name="initial_facility_assets_count"
           type="number"
           inputMode="numeric"
           min="0"
@@ -92,11 +103,11 @@ export function CompanyRegistrationStepThree({
           icon={PackageSearch}
           placeholder="0"
           required
-          value={data.initialAssetsCount}
-          error={errors.initialAssetsCount}
-          onBlur={() => onBlur("initialAssetsCount")}
+          value={data.initial_facility_assets_count}
+          error={errors.initial_facility_assets_count}
+          onBlur={() => onBlur("initial_facility_assets_count")}
           onChange={(event) =>
-            onChange("initialAssetsCount", event.target.value)
+            onChange("initial_facility_assets_count", event.target.value)
           }
         />
       </div>

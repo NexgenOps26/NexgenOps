@@ -20,69 +20,73 @@ export function CompanyRegistrationStepOne({
     <div className="grid gap-4 sm:grid-cols-2">
       <AuthField
         id="company-name"
-        name="companyName"
+        name="company_name"
         label="Company Name *"
         icon={Building2}
         placeholder="Nexgen Facilities Pvt. Ltd."
         required
-        value={data.companyName}
-        error={errors.companyName}
-        onBlur={() => onBlur("companyName")}
-        onChange={(event) => onChange("companyName", event.target.value)}
+        value={data.company_name}
+        error={errors.company_name}
+        onBlur={() => onBlur("company_name")}
+        onChange={(event) => onChange("company_name", event.target.value)}
       />
       <AuthField
         id="company-type"
-        name="companyType"
+        name="company_type"
         label="Company Type *"
         icon={BriefcaseBusiness}
         placeholder="Private limited, enterprise..."
         required
-        value={data.companyType}
-        error={errors.companyType}
-        onBlur={() => onBlur("companyType")}
-        onChange={(event) => onChange("companyType", event.target.value)}
+        value={data.company_type}
+        error={errors.company_type}
+        onBlur={() => onBlur("company_type")}
+        onChange={(event) => onChange("company_type", event.target.value)}
       />
       <AuthField
         id="industry-sectors"
-        name="industrySectors"
-        label="Industry Sectors *"
+        name="industry_sector"
+        label="Industry Sector *"
         icon={Factory}
         placeholder="Manufacturing, healthcare..."
         required
-        value={data.industrySectors}
-        error={errors.industrySectors}
-        onBlur={() => onBlur("industrySectors")}
-        onChange={(event) => onChange("industrySectors", event.target.value)}
+        value={data.industry_sector}
+        error={errors.industry_sector}
+        onBlur={() => onBlur("industry_sector")}
+        onChange={(event) => onChange("industry_sector", event.target.value)}
       />
       <AuthField
         id="gst-number"
-        name="gstNumber"
+        name="gst_identification_number"
         label="GST Identification Number *"
         icon={BadgeCheck}
         placeholder="Enter GSTIN"
         required
-        value={data.gstNumber}
-        error={errors.gstNumber}
-        onBlur={() => onBlur("gstNumber")}
-        onChange={(event) => onChange("gstNumber", event.target.value)}
+        value={data.gst_identification_number}
+        error={errors.gst_identification_number}
+        onBlur={() => onBlur("gst_identification_number")}
+        onChange={(event) =>
+          onChange("gst_identification_number", event.target.value)
+        }
       />
       <AuthField
         id="corporate-website"
-        name="corporateWebsite"
+        name="corporate_website"
         type="url"
         inputMode="url"
         autoComplete="url"
         label="Optional Corporate Website"
         icon={Globe2}
         placeholder="https://company.example"
-        value={data.corporateWebsite}
-        error={errors.corporateWebsite}
-        onBlur={() => onBlur("corporateWebsite")}
-        onChange={(event) => onChange("corporateWebsite", event.target.value)}
+        value={data.corporate_website}
+        error={errors.corporate_website}
+        onBlur={() => onBlur("corporate_website")}
+        onChange={(event) =>
+          onChange("corporate_website", event.target.value)
+        }
       />
       <AuthField
         id="corporate-work-email"
-        name="corporateWorkEmail"
+        name="corporate_work_email"
         type="email"
         inputMode="email"
         autoComplete="email"
@@ -90,17 +94,17 @@ export function CompanyRegistrationStepOne({
         icon={Mail}
         placeholder="operations@company.com"
         required
-        value={data.corporateWorkEmail}
-        error={errors.corporateWorkEmail}
-        onBlur={() => onBlur("corporateWorkEmail")}
+        value={data.corporate_work_email}
+        error={errors.corporate_work_email}
+        onBlur={() => onBlur("corporate_work_email")}
         onChange={(event) =>
-          onChange("corporateWorkEmail", event.target.value)
+          onChange("corporate_work_email", event.target.value)
         }
       />
       <div className="sm:col-span-2">
         <AuthField
           id="company-phone"
-          name="companyPhone"
+          name="company_phone"
           type="tel"
           inputMode="tel"
           autoComplete="tel"
@@ -108,10 +112,12 @@ export function CompanyRegistrationStepOne({
           icon={Phone}
           placeholder="+91 98765 43210"
           required
-          value={data.companyPhone}
-          error={errors.companyPhone}
-          onBlur={() => onBlur("companyPhone")}
-          onChange={(event) => onChange("companyPhone", event.target.value)}
+          value={data.company_phone}
+          error={errors.company_phone}
+          onBlur={() => onBlur("company_phone")}
+          onChange={(event) =>
+            onChange("company_phone", event.target.value)
+          }
         />
       </div>
     </div>
