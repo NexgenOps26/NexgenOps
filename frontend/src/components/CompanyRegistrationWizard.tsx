@@ -25,7 +25,9 @@ export {
 } from "./CompanyRegistrationTypes";
 
 type CompanyRegistrationWizardProps = {
-  onRegisterCompany: (payload: CompanyRegistrationPayload) => void;
+  onRegisterCompany: (
+    payload: CompanyRegistrationPayload,
+  ) => Promise<void> | void;
   onSignInClick: () => void;
 };
 

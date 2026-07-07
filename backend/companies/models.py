@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Company(models.Model):
@@ -33,9 +34,24 @@ class Company(models.Model):
     # SLIDE 4 / onboarding metadata
     terms_accepted = models.BooleanField(default=False)
 
-    # System fields
+    # System fields / audit fields
+    created_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="companies_created"
+    )
+
+    updated_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="companies_updated"
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
     def __str__(self):
         return self.company_name

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import api from "../api/axios";
 import { BrandPanel } from "./BrandPanel";
 import {
   CompanyRegistrationWizard,
@@ -8,12 +9,36 @@ import { LoginForm } from "./LoginForm";
 
 type AuthMode = "login" | "register";
 
-function handleRegisterCompany(_payload: CompanyRegistrationPayload) {
-  // Frontend-only boundary for the future company registration API.
-}
-
 export function LoginPage() {
   const [mode, setMode] = useState<AuthMode>("login");
+  const [isRegisteringCompany, setIsRegisteringCompany] = useState(false);
+
+  async function handleRegisterCompany(
+    payload: CompanyRegistrationPayload,
+  ) {
+    try {
+      setIsRegisteringCompany(true);
+
+      const response = await api.post("/companies/register/", payload);
+
+      console.log("Company registration success:", response.data);
+
+      alert("Company registered successfully. You can now sign in.");
+      setMode("login");
+    } catch (error: any) {
+      console.error("Company registration failed:", error);
+
+      if (error.response?.data) {
+        alert(
+          `Registration failed: ${JSON.stringify(error.response.data)}`,
+        );
+      } else {
+        alert("Registration failed. Please try again.");
+      }
+    } finally {
+      setIsRegisteringCompany(false);
+    }
+  }
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#f8fafc] font-sans">
