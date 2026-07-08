@@ -1,3 +1,5 @@
+import { AtSign, UserCircle } from "lucide-react";
+import { AuthField, PasswordField } from "./AuthFormControls";
 import type { CompanyRegistrationStepProps } from "./CompanyRegistrationTypes";
 
 export function CompanyRegistrationStepFour({
@@ -45,6 +47,79 @@ export function CompanyRegistrationStepFour({
         <p className="mt-3 text-xs leading-5 text-slate-600">
           Use Back to correct any information before completing registration.
         </p>
+      </section>
+
+      <section aria-labelledby="admin-account-heading">
+        <h4
+          id="admin-account-heading"
+          className="text-sm font-black uppercase tracking-[0.12em] text-slate-700"
+        >
+          Admin account credentials
+        </h4>
+        <p className="mt-1 text-xs leading-5 text-slate-600">
+          These sign you in as the company&apos;s admin once registration is
+          complete.
+        </p>
+        <div className="mt-2.5 grid gap-3 sm:grid-cols-2">
+          <AuthField
+            id="admin-username"
+            name="admin_username"
+            autoComplete="username"
+            label="Admin Username *"
+            icon={UserCircle}
+            placeholder="admin.acme"
+            required
+            value={data.admin_username}
+            error={errors.admin_username}
+            onBlur={() => onBlur("admin_username")}
+            onChange={(event) =>
+              onChange("admin_username", event.target.value)
+            }
+          />
+          <AuthField
+            id="admin-email"
+            name="admin_email"
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            label="Admin Email *"
+            icon={AtSign}
+            placeholder="admin@company.com"
+            required
+            value={data.admin_email}
+            error={errors.admin_email}
+            onBlur={() => onBlur("admin_email")}
+            onChange={(event) => onChange("admin_email", event.target.value)}
+          />
+          <PasswordField
+            id="admin-password"
+            name="admin_password"
+            autoComplete="new-password"
+            label="Admin Password *"
+            placeholder="At least 8 characters"
+            required
+            value={data.admin_password}
+            error={errors.admin_password}
+            onBlur={() => onBlur("admin_password")}
+            onChange={(event) =>
+              onChange("admin_password", event.target.value)
+            }
+          />
+          <PasswordField
+            id="admin-confirm-password"
+            name="admin_confirm_password"
+            autoComplete="new-password"
+            label="Confirm Admin Password *"
+            placeholder="Re-enter password"
+            required
+            value={data.admin_confirm_password}
+            error={errors.admin_confirm_password}
+            onBlur={() => onBlur("admin_confirm_password")}
+            onChange={(event) =>
+              onChange("admin_confirm_password", event.target.value)
+            }
+          />
+        </div>
       </section>
 
       <div>

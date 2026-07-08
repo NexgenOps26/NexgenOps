@@ -20,6 +20,10 @@ export type CompanyRegistrationFormState = {
   pre_onboarded_core_roster_count: string;
   workforce_shifts_strength: string;
   initial_facility_assets_count: string;
+  admin_username: string;
+  admin_email: string;
+  admin_password: string;
+  admin_confirm_password: string;
   terms_accepted: boolean;
 };
 
@@ -45,6 +49,10 @@ export type CompanyRegistrationPayload = {
   pre_onboarded_core_roster_count: number;
   workforce_shifts_strength: number;
   initial_facility_assets_count: number;
+  username: string;
+  email: string;
+  password: string;
+  confirm_password: string;
   terms_accepted: boolean;
 };
 
@@ -88,6 +96,10 @@ export function toCompanyRegistrationPayload(
     initial_facility_assets_count: Number(
       formState.initial_facility_assets_count,
     ),
+    username: formState.admin_username.trim(),
+    email: formState.admin_email.trim(),
+    password: formState.admin_password,
+    confirm_password: formState.admin_confirm_password,
     terms_accepted: formState.terms_accepted,
   };
 }
