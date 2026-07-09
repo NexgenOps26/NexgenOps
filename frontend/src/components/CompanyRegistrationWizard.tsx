@@ -66,7 +66,13 @@ const stepFields: CompanyRegistrationField[][] = [
     "workforce_shifts_strength",
     "initial_facility_assets_count",
   ],
-  ["terms_accepted"],
+  [
+    "admin_username",
+    "admin_email",
+    "admin_password",
+    "admin_confirm_password",
+    "terms_accepted",
+  ],
 ];
 
 const initialData: CompanyRegistrationFormState = {
@@ -91,6 +97,10 @@ const initialData: CompanyRegistrationFormState = {
   pre_onboarded_core_roster_count: "",
   workforce_shifts_strength: "",
   initial_facility_assets_count: "",
+  admin_username: "",
+  admin_email: "",
+  admin_password: "",
+  admin_confirm_password: "",
   terms_accepted: false,
 };
 
@@ -217,6 +227,28 @@ function validateRegistration(
     "Initial assets count",
     0,
   );
+
+  requireText("admin_username", "Admin username", 150);
+  requireText("admin_email", "Admin email", 254);
+
+  if (
+    data.admin_email.trim() &&
+    !emailPattern.test(data.admin_email.trim())
+  ) {
+    errors.admin_email = "Enter a valid admin email address.";
+  }
+
+  if (!data.admin_password) {
+    errors.admin_password = "Admin password is required.";
+  } else if (data.admin_password.length < 8) {
+    errors.admin_password = "Password must be at least 8 characters.";
+  }
+
+  if (!data.admin_confirm_password) {
+    errors.admin_confirm_password = "Please confirm the admin password.";
+  } else if (data.admin_confirm_password !== data.admin_password) {
+    errors.admin_confirm_password = "Passwords do not match.";
+  }
 
   if (!data.terms_accepted) {
     errors.terms_accepted = "You must accept the terms to continue.";
