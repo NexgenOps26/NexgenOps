@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { LoginPage } from "./components/LoginPage";
 import { DashboardPage } from "./components/DashboardPage";
+import { CopilotWidget } from "./components/CopilotWidget";
 
 export default function App() {
   return (
@@ -10,6 +11,7 @@ export default function App() {
         <Route path="/" element={<LoginPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
       </Routes>
+      <CopilotWidget />
     </BrowserRouter>
   );
 }
